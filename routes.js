@@ -56,7 +56,8 @@ function movie_list(req, res) {
 
 async function actor_list(req, res) {
     let id = req.query.id
-    var sql = `select url as actor_url, name as actor_name from Actors where movie_id =  '${id}' and url != ''  limit 2 ` 
+    let limit = req.query.limit
+    var sql = `select url as actor_url, name as actor_name from Actors where movie_id =  '${id}' and url != '' limit ${limit || 100} ` 
     const a = await getData(sql)
     res.send(format(a))
 }
